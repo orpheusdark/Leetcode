@@ -1,0 +1,8 @@
+.collect(joining(" "))
+            + "\n"
+        );
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
