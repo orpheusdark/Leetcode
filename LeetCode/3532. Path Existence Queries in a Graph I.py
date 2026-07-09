@@ -8,14 +8,16 @@ return self.id[u]
 class Solution:
 def pathExistenceQueries(
 self,
-n: int,
-nums: list[int],
-maxDiff: int,
-queries: list[list[int]]
-) -> list[bool]:
-uf = UnionFind(n)
-for i in range(1, n):
-if abs(nums[i] - nums[i - 1]) <= maxDiff:
-uf.unionByRank(i, i - 1)
-return [uf.find(u) == uf.find(v)
-for u, v in queries]
+self.id[j] = i
+elif self.rank[i] > self.rank[j]:
+self.id[i] = j
+if self.rank[i] < self.rank[j]:
+return
+if i == j:
+j = self.find(v)
+i = self.find(u)
+def unionByRank(self, u: int, v: int) -> None:
+self.rank = [0] * n
+def __init__(self, n: int):
+self.id = list(range(n))
+class UnionFind:
