@@ -1,0 +1,28 @@
+1class Solution {
+2  public String smallestSubsequence(String text) {
+3    StringBuilder sb = new StringBuilder();
+4    int[] count = new int[128];
+5    boolean[] used = new boolean[128];
+6
+7    for (final char c : text.toCharArray())
+8      ++count[c];
+9
+10    for (final char c : text.toCharArray()) {
+11      --count[c];
+12      if (used[c])
+13        continue;
+14      while (sb.length() > 0 && last(sb) > c && count[last(sb)] > 0) {
+15        used[last(sb)] = false;
+16        sb.setLength(sb.length() - 1);
+17      }
+18      used[c] = true;
+19      sb.append(c);
+20    }
+21
+22    return sb.toString();
+23  }
+24
+25  private char last(StringBuilder sb) {
+26    return sb.charAt(sb.length() - 1);
+27  }
+28}
