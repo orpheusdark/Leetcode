@@ -1,0 +1,45 @@
+1class Solution {
+2 public:
+3  void setZeroes(vector<vector<int>>& matrix) {
+4    const int m = matrix.size();
+5    const int n = matrix[0].size();
+6    bool shouldFillFirstRow = false;
+7    bool shouldFillFirstCol = false;
+8
+9    for (int j = 0; j < n; ++j)
+10      if (matrix[0][j] == 0) {
+11        shouldFillFirstRow = true;
+12        break;
+13      }
+14
+15    for (int i = 0; i < m; ++i)
+16      if (matrix[i][0] == 0) {
+17        shouldFillFirstCol = true;
+18        break;
+19      }
+20
+21    // Store the information in the first row and the first column.
+22    for (int i = 1; i < m; ++i)
+23      for (int j = 1; j < n; ++j)
+24        if (matrix[i][j] == 0) {
+25          matrix[i][0] = 0;
+26          matrix[0][j] = 0;
+27        }
+28
+29    // Fill 0s for the matrix except the first row and the first column.
+30    for (int i = 1; i < m; ++i)
+31      for (int j = 1; j < n; ++j)
+32        if (matrix[i][0] == 0 || matrix[0][j] == 0)
+33          matrix[i][j] = 0;
+34
+35    // Fill 0s for the first row if needed.
+36    if (shouldFillFirstRow)
+37      for (int j = 0; j < n; ++j)
+38        matrix[0][j] = 0;
+39
+40    // Fill 0s for the first column if needed.
+41    if (shouldFillFirstCol)
+42      for (int i = 0; i < m; ++i)
+43        matrix[i][0] = 0;
+44  }
+45};
