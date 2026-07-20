@@ -1,9 +1,4 @@
-int [][] mat2 = new int [n][m];
-        for(int i = 0; i<n ; i++){
-            for(int j = 0; j<m; j++){
-                mat2[i][j] = mat[i][j];
-            }
-        }
+}
         
         for (int i = 0; i<n; i++) {
             for (int j = 0; j<m; j++)
@@ -25,3 +20,9 @@ int [][] mat2 = new int [n][m];
                         sum += mat2[i][j - 1];
                         
                         mat[i][j - 1] = 0;
+                    }
+                    if (j<m - 1) {
+                        sum += mat2[i][j + 1];
+                        
+                        mat[i][j + 1] = 0;
+                    }
