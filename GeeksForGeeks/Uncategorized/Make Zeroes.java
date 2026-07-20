@@ -1,4 +1,5 @@
-}
+mat2[i][j] = mat[i][j];
+            }
         }
         
         for (int i = 0; i<n; i++) {
@@ -24,5 +25,3 @@
                     }
                     if (j<m - 1) {
                         sum += mat2[i][j + 1];
-                        
-                        mat[i][j + 1] = 0;
