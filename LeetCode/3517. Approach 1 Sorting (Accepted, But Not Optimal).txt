@@ -1,0 +1,64 @@
+s = "aabbc"
+
+First half = "aa"
+Middle     = "b"
+Half = "ab"
+Middle = "c"
+
+Palindrome = "ab" + "c" + "ba"
+           = "abcba"
+class Solution {
+    public String smallestPalindrome(String s) {
+        int n = s.length();
+
+        char[] half = s.substring(0, n / 2).toCharArray();
+        Arrays.sort(half);
+
+        String res =
+            new String(half)
+            + ((n & 1) == 1 ? s.charAt(n / 2) : "")
+            + new StringBuilder(new String(half)).reverse();
+
+        return res;
+    }
+}
+answer = sortedHalf + middle + reverse(sortedHalf)
+s = "aabbc"
+n = 5
+
+n / 2 = 2
+
+First half = "aa"
+Middle = "b"
+"aa"
+half   = "aa"
+middle = "b"
+reverse(half) = "aa"
+"aa" + "b" + "aa"
+= "aabaa"
+class Solution {
+    public String smallestPalindrome(String s) {
+        int n = s.length();
+
+        String middleChar = (n & 1) == 1
+                ? s.charAt(n / 2) + ""
+                : "";
+
+        StringBuilder half = new StringBuilder();
+        int[] hashTable = new int[26];
+
+        for(int i = 0; i < n / 2; i++){
+            hashTable[s.charAt(i) - 'a']++;
+        }
+
+        for(int i = 0; i < 26; i++){
+            half.append(
+                ((char)(i + 'a') + "").repeat(hashTable[i])
+            );
+        }
+
+        return half.toString()
+                + middleChar
+                + half.reverse().toString();
+    }
+}
