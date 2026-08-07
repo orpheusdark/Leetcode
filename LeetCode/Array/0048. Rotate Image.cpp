@@ -1,9 +1,137 @@
-class Solution {
- public:
-  void rotate(vector<vector<int>>& matrix) {
-    ranges::reverse(matrix);
-    for (int i = 0; i < matrix.size(); ++i)
-      for (int j = i + 1; j < matrix.size(); ++j)
-        swap(matrix[i][j], matrix[j][i]);
-  }
-};
+public void setZeroes(int[][] matrix){
+
+		int m= matrix.length, n= matrix[0].length;
+        int matrix2[][]= new int[m][n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++)
+                matrix2[i][j]=matrix[i][j];
+        }
+        
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(matrix[i][j]==0){
+                    for(int k=0;k<n;k++)
+                        matrix2[i][k]=0;
+
+                    for(int k=0;k<m;k++)
+                        matrix2[k][j]=0;
+                }
+            }
+        }
+    
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++)
+                matrix[i][j]=matrix2[i][j];
+        }
+    }
+public void setZeroes(int[][] matrix){
+
+		int m=matrix.length, n=matrix[0].length;
+        int rowsArray[]= new int[m];
+        int colsArray[]= new int[n];
+        
+        Arrays.fill(rowsArray,1);
+        Arrays.fill(colsArray,1);
+        
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(matrix[i][j]==0){
+                    rowsArray[i]=0;
+                    colsArray[j]=0;
+                }
+            }
+        }
+        
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(rowsArray[i]==0 || colsArray[j]==0)
+                    matrix[i][j]=0;
+            }
+        }
+    }
+public void setZeroes(int[][] matrix){
+
+		int m=matrix.length, n=matrix[0].length;
+        boolean isRow0=false, isCol0=false;
+        
+        for(int j=0;j<n;j++){
+            if(matrix[0][j]==0)
+                isRow0=true;
+        }
+        
+        for(int i=0;i<m;i++){
+            if(matrix[i][0]==0)
+                isCol0=true;
+        }
+        
+        for(int i=1;i<m;i++){
+            for(int j=1;j<n;j++){
+                if(matrix[i][j]==0){
+                    matrix[i][0]=0;
+                    matrix[0][j]=0;
+                }
+            }
+        }
+        
+        for(int i=1;i<m;i++){
+            for(int j=1;j<n;j++){
+                if(matrix[0][j]==0 || matrix[i][0]==0)
+                    matrix[i][j]=0;
+            }
+        }
+        
+        if(isRow0){
+            for(int j=0;j<n;j++)
+                matrix[0][j]=0;
+        }
+        
+        if(isCol0){
+            for(int i=0;i<m;i++)
+                matrix[i][0]=0;
+        }
+    }
+1class Solution {
+2 public:
+3  void setZeroes(vector<vector<int>>& matrix) {
+4    const int m = matrix.size();
+5    const int n = matrix[0].size();
+6    bool shouldFillFirstRow = false;
+7    bool shouldFillFirstCol = false;
+8
+9    for (int j = 0; j < n; ++j)
+10      if (matrix[0][j] == 0) {
+11        shouldFillFirstRow = true;
+12        break;
+13      }
+14
+15    for (int i = 0; i < m; ++i)
+16      if (matrix[i][0] == 0) {
+17        shouldFillFirstCol = true;
+18        break;
+19      }
+20
+21    // Store the information in the first row and the first column.
+22    for (int i = 1; i < m; ++i)
+23      for (int j = 1; j < n; ++j)
+24        if (matrix[i][j] == 0) {
+25          matrix[i][0] = 0;
+26          matrix[0][j] = 0;
+27        }
+28
+29    // Fill 0s for the matrix except the first row and the first column.
+30    for (int i = 1; i < m; ++i)
+31      for (int j = 1; j < n; ++j)
+32        if (matrix[i][0] == 0 || matrix[0][j] == 0)
+33          matrix[i][j] = 0;
+34
+35    // Fill 0s for the first row if needed.
+36    if (shouldFillFirstRow)
+37      for (int j = 0; j < n; ++j)
+38        matrix[0][j] = 0;
+39
+40    // Fill 0s for the first column if needed.
+41    if (shouldFillFirstCol)
+42      for (int i = 0; i < m; ++i)
+43        matrix[i][0] = 0;
+44  }
+45};

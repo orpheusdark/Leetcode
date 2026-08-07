@@ -1,0 +1,14 @@
+class Solution {
+public int missingNumber(int[] nums) {
+int n = nums.length;
+for(int i = 0; i < nums.length; i++) {
+v[nums[i]] = nums[i];
+}
+if(v[i] == -1) return i;
+}
+for(int i = 0; i < v.length; i++) {
+return 0;
+Arrays.fill(v, -1);
+int[] v = new int[n+1];
+}
+}
